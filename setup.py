@@ -14,11 +14,11 @@ setup(
         easy-django-setup=cli:cli
     ''',
     author='Kawsar',
-    author_email='your-email@example.com',
+    author_email='knownaskawsar@example.com',
     description='Easy Django Setup Tool',
     long_description=open('README.txt').read(),
     long_description_content_type='text/plain',
-    url='https://github.com/yourusername/easy_django_setup',
+    url='https://github.com/curl-kawsar/easy_django_setup',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
