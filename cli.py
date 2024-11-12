@@ -1,4 +1,4 @@
-# cli.py
+
 import os
 import click
 import subprocess
@@ -12,15 +12,13 @@ def cli():
 @click.argument('project_name')
 def init(project_name):
     """Initialize a new Django project with various options."""
-    # Fancy header
     click.echo(click.style("\n=====================================", fg='cyan', bold=True))
     click.echo(click.style("||                                 ||", fg='cyan', bold=True))
     click.echo(click.style("||      Easy Django Setup Tool     ||", fg='cyan', bold=True))
     click.echo(click.style("||           by Kawsar             ||", fg='cyan', bold=True))
     click.echo(click.style("||                                 ||", fg='cyan', bold=True))
     click.echo(click.style("=====================================\n", fg='cyan', bold=True))
-    
-    # Step 1: Take all options input
+
     jwt_auth = click.confirm(click.style('Do you want to include JWT authentication?', fg='green', bold=True))
     token_auth = click.confirm(click.style('Do you want to include token-based authentication?', fg='green', bold=True))
     google_login = click.confirm(click.style('Do you want to include Google login?', fg='green', bold=True))
@@ -28,14 +26,12 @@ def init(project_name):
     docker_setup = click.confirm(click.style('Do you want to include Docker setup?', fg='green', bold=True))
     swagger_docs = click.confirm(click.style('Do you want to include Swagger documentation?', fg='green', bold=True))
     create_app = click.confirm(click.style('Do you want to create a new app?', fg='green', bold=True))
-    
-    # Step 2: Generate Django project
+
     subprocess.run(['django-admin', 'startproject', project_name])
     
-    # Step 3: Create predefined configurations
+
     create_predefined_configs(project_name)
-    
-    # Step 4: Add options based on user input
+
     if jwt_auth:
         setup_jwt(project_name)
     if token_auth:
@@ -49,18 +45,18 @@ def init(project_name):
     if swagger_docs:
         setup_swagger(project_name)
     
-    # Step 5: Integrate Cloudinary/AWS S3
+
     setup_file_uploads(project_name)
     
-    # Step 6: Configure secure cookies
+
     configure_secure_cookies(project_name)
     
-    # Step 7: Create a new app if requested
+
     if create_app:
         app_name = click.prompt(click.style('Enter the app name', fg='yellow', bold=True))
         create_new_app(project_name, app_name)
     
-    # Step 8: Summary message
+
     click.echo(click.style(f"\nProject {project_name} setup complete. Follow the instructions below to get started:", fg='blue', bold=True))
     click.echo(click.style(f"1. Navigate to the project directory: cd {project_name}", fg='blue'))
     click.echo(click.style("2. Create a virtual environment and install dependencies.", fg='blue'))
@@ -160,7 +156,6 @@ def setup_redis(project_name):
 
 def setup_docker(project_name):
     """Add Docker setup."""
-    # Create Docker files
     with open(os.path.join(project_name, 'Dockerfile'), 'w') as f:
         f.write("FROM python:3.8\nWORKDIR /app\nCOPY . /app\nRUN pip install -r requirements.txt\nCMD ['python', 'manage.py', 'runserver', '0.0.0.0:8000']\n")
     
